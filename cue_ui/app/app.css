@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+html {
+  font-size: 16px;
+}
+
 @theme {
   --color-black-900: hsl(240 10% 3.9%);
 }
