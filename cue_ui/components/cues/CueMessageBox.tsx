@@ -99,7 +99,7 @@ const CueMessageBox: React.FC = (): React.JSX.Element => {
   );
 
   return (
-    <div className="mt-auto flex flex-col gap-y-5">
+    <div className="mt-auto flex flex-col gap-y-5 px-6">
       <CueQuickPromptList />
       {postError && (
         <span className="block text-red-800">Unable to generate response.</span>
