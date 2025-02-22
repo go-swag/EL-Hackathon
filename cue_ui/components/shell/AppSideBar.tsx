@@ -1,12 +1,12 @@
+import { ScrollArea } from '@/components/ui/ScrollArea';
 import CueSnippetList from '@components/cues/CueSnippetList';
-import { ScrollArea } from '@components/ui/scroll-area';
 interface SnippetsPanelProps {
   title: string;
 }
 
 const AppSideBar = ({ title }: SnippetsPanelProps) => {
   return (
-    <div className="h-full bg-black/20 shrink min-w-[450px] overflow-y-auto">
+    <div className="h-full bg-black/20 min-w-[30%] overflow-y-auto">
       <div className="p-4 border-b border-white/10">
         <h2 className="text-2xl font-semibold text-white">{title}</h2>
       </div>

@@ -2,8 +2,8 @@ const AppPrimaryView: React.FC<{
   children?: React.ReactNode;
 }> = ({ children }): React.JSX.Element => {
   return (
-    <div className="grow border-r border-r-white/10 mr-6">
-      <div className="p-6 h-full">{children}</div>
+    <div className="grow max-w-[calc(100%-30%)] border-r border-r-white/10">
+      <div className="py-6 h-full">{children}</div>
     </div>
   );
 };

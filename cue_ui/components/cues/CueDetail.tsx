@@ -5,6 +5,7 @@ import { CueMessage } from '@types';
 import CueMessageBox from './CueMessageBox';
 
 import ReactMarkdown from 'react-markdown';
+import StyleAdjuster from '../ui/StyleAdjuster';
 import './markdown.css';
 
 const NoCueSelected: React.FC = (): React.JSX.Element => {
@@ -19,13 +20,19 @@ const CueBreakdown: React.FC<CueMessage> = ({
   question,
   answer,
 }): React.JSX.Element => {
+  const { styling } = useCues();
   return (
-    <div className="py-6">
-      <h2 className="text-white text-xl font-medium border-b border-b-white/10 pb-4 mb-6">
-        {question}
-      </h2>
+    <div className="p-6 overflow-y-auto">
+      <h2 className="text-white text-3xl font-medium pb-4 mb-6">{question}</h2>
       <div className="mt-6 text-white">
-        <div className="markdown">
+        <div
+          className="markdown"
+          style={
+            {
+              ...styling,
+            } as React.CSSProperties
+          }
+        >
           <ReactMarkdown>{answer}</ReactMarkdown>
         </div>
       </div>
@@ -38,7 +45,14 @@ const CueDetail: React.FC = (): React.JSX.Element => {
 
   return (
     <div className="flex flex-col h-full">
-      {!selectedCue ? <NoCueSelected /> : <CueBreakdown {...selectedCue} />}
+      {!selectedCue ? (
+        <NoCueSelected />
+      ) : (
+        <div>
+          <StyleAdjuster />
+          <CueBreakdown {...selectedCue} />
+        </div>
+      )}
       <CueMessageBox />
     </div>
   );
