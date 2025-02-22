@@ -1,7 +1,7 @@
 'use client';
 
 import { useCues } from '@/context/CueContext';
-import { CueDetail } from '@/cue_ui/types';
+import { CueDetail } from '@types';
 import { ChevronRight } from 'lucide-react';
 
 const exampleData: CueDetail = {
