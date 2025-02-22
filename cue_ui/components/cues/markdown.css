@@ -1,0 +1,18 @@
+.markdown > ul:not(.first-child),
+.markdown > ol:not(:first-child) {
+  list-style: initial;
+  list-style-position: inside;
+  margin-top: -1em;
+}
+
+.markdown > * {
+  margin: 1.5em 0;
+}
+
+.markdown > *:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown > *:last-child {
+  margin-bottom: 0 !important;
+}

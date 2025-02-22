@@ -1,9 +1,12 @@
 export interface CueMessage {
-  id: string;
-  title: string;
-  text: string;
+  question: string;
+  answer: string;
 }
 
 export interface CueDetail {
   messages: CueMessage[];
 }
+
+export type HistoryCueFetchResponse = {
+  cue_histories: CueMessage[];
+};
