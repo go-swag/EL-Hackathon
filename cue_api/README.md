@@ -8,6 +8,12 @@
 
 `pip install -r requirements.txt`
 
+`cp .example.env .env`
+
+Set up .env
+
+`source .env`
+
 `cd app`
 
 `fastapi dev main.py`
