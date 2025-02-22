@@ -5,7 +5,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mistralai import Mistral
 from pydantic import BaseModel, Field
-from starlette.responses import StreamingResponse
 
 from .product_data import bmw_product_data
 
@@ -42,18 +41,17 @@ class CueDetails(BaseModel):
 
 chat_history = []
 
-###
-###
-### {'question': 'what is the hybrid range?'}
-### {'audio_file': 1}
-###
-###
-###
-### {'chat_history':[ {type:'text','question':'what is the hybrid range?', 'answer':'36km' } ]
-###
-###
 
 cue_histories = []
+
+
+@app.delete("/history")
+def delete_history():
+    global chat_history
+    global cue_histories
+    chat_history.clear()
+    cue_histories.clear()
+    return {"message": "Chat history and cue histories have been cleared."}
 
 
 @app.post(
@@ -101,26 +99,13 @@ def submit_text(question_message: QuestionMessage):
     return cue_details
 
 
+@app.get("/history")
+def get_history():
+    cue_details = CueDetails(cue_histories=cue_histories)
+
+    return cue_details
+
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
-
-
-def generate_stream():
-    stream_response = client.chat.stream(
-        model=model,
-        messages=[
-            {
-                "role": "user",
-                "content": "What is the best French cheese?",
-            },
-        ],
-    )
-
-    for chunk in stream_response:
-        yield chunk.data.choices[0].delta.content
-
-
-@app.get("/stream")
-def stream():
-    return StreamingResponse(generate_stream(), media_type="text/event-stream")
