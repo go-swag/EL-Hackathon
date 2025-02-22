@@ -13,7 +13,7 @@ const AppShell: React.FC<SplitLayoutProps> = ({
     <div className="flex flex-row overflow-hidden max-h-[calc(max(100vh,600px))] h-screen">
       <CueContextProvider>
         <AppPrimaryView>{children}</AppPrimaryView>
-        <AppSideBar title="Conversation Snippets" />
+        <AppSideBar title="Cue Up" />
       </CueContextProvider>
     </div>
   );

@@ -3,7 +3,7 @@ import { HistoryCueFetchResponse } from '@/types/cue.types';
 import { QuickPrompt } from '@/types/prompt.types';
 import { cn } from '@/utils/classname.utils';
 import { LoaderCircle } from 'lucide-react';
-import { ChangeEvent, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
 const quickPrompts: QuickPrompt[] = [
   {
@@ -44,28 +44,23 @@ const CueQuickPromptList: React.FC = (): React.JSX.Element => {
 };
 
 const CueMessageBox: React.FC = (): React.JSX.Element => {
-  const { updateLocalMessages } = useCues();
+  const { updateLocalMessages, setSelectedCue } = useCues();
 
-  const [postQuestion, setPostQuestion] = useState<string | null>(null);
-
-  const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const [postPending, setPostPending] = useState<boolean>(false);
   const [postError, setPostError] = useState<boolean>(false);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.currentTarget.value;
-    if (newValue !== null && newValue.trim()) {
-      setPostQuestion(newValue);
-    }
-  };
+  const handlePostMessage = async (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.currentTarget);
+    const question = formData.get('question') as string;
 
-  const handlePostMessage = async () => {
     setPostError(false);
 
-    if (!postQuestion || !postQuestion?.trim().length) {
-      if (inputRef.current) {
-        inputRef.current.focus();
+    if (!question || !question?.trim().length) {
+      if (formRef.current) {
+        formRef.current.focus();
       }
       return;
     }
@@ -79,7 +74,7 @@ const CueMessageBox: React.FC = (): React.JSX.Element => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        question: postQuestion,
+        question: question,
         audio_file: null,
       }),
     });
@@ -89,9 +84,10 @@ const CueMessageBox: React.FC = (): React.JSX.Element => {
     } else {
       const responseJson: HistoryCueFetchResponse = await response.json();
       updateLocalMessages(responseJson.cue_histories);
+      setSelectedCue(responseJson.cue_histories[0]);
     }
 
-    setPostQuestion('');
+    formRef.current?.reset();
     setPostPending(false);
   };
 
@@ -108,25 +104,24 @@ const CueMessageBox: React.FC = (): React.JSX.Element => {
       {postError && (
         <span className="block text-red-800">Unable to generate response.</span>
       )}
-      <div className="flex flex-row flex-wrap gap-4">
-        <input
-          type="text"
-          className={inputClass}
-          onChange={handleChange}
-          ref={inputRef}
-          value={postQuestion ?? ''}
-        />
-        <button
-          type="button"
-          className="rounded-lg flex justify-center items-center bg-white text-black px-4 py-2 text-sm hover:bg-white/85 cursor-pointer min-w-[140px] text-center"
-          onClick={handlePostMessage}
+      <div>
+        <form
+          className="flex flex-row flex-wrap gap-4"
+          onSubmit={handlePostMessage}
+          ref={formRef}
         >
-          {postPending ? (
-            <LoaderCircle className="animate-spin" />
-          ) : (
-            'Send Message'
-          )}
-        </button>
+          <input type="text" className={inputClass} name="question" />
+          <button
+            type="submit"
+            className="rounded-lg flex justify-center items-center bg-white text-black px-4 py-2 text-sm hover:bg-white/85 cursor-pointer min-w-[140px] text-center"
+          >
+            {postPending ? (
+              <LoaderCircle className="animate-spin" />
+            ) : (
+              'Send Message'
+            )}
+          </button>
+        </form>
       </div>
     </div>
   );
