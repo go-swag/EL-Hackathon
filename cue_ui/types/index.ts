@@ -1,1 +1,1 @@
-export { type CueDetail } from './cue.types';
+export { type CueDetail, type CueMessage } from './cue.types';

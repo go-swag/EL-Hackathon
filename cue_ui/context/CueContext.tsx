@@ -1,6 +1,6 @@
 'use client';
 
-import { CueMessage } from '@/cue_ui/types/cue.types';
+import { CueMessage } from '@types';
 import { createContext, useCallback, useContext, useState } from 'react';
 
 interface CueContextType {

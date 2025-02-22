@@ -1,5 +1,5 @@
-import { ScrollArea } from '@/components/ui/scroll-area';
-import CueSnippetList from '../cues/CueSnippetList';
+import CueSnippetList from '@components/cues/CueSnippetList';
+import { ScrollArea } from '@components/ui/scroll-area';
 interface SnippetsPanelProps {
   title: string;
 }

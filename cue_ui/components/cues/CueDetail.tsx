@@ -1,7 +1,7 @@
 'use client';
 
 import { useCues } from '@/context/CueContext';
-import { CueMessage } from '@/cue_ui/types/cue.types';
+import { CueMessage } from '@types';
 
 const NoCueSelected: React.FC = (): React.JSX.Element => {
   return (
