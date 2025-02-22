@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: cue_api
+    runtime: python
+    repo: https://github.com/go-swag/EL-Hackathon
+    rootDir: cue_api
+    plan: standard
+    previewPlan: starter
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: MISTRAL_API_KEY
+        generateValue: true
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd app && fastapi run main.py
+    healthCheckPath: /health
