@@ -40,9 +40,9 @@ const FontHandler: React.FC = (): React.JSX.Element => {
             fontSize: `${value}px`,
           })
         }
-        min={52}
+        min={48}
         max={100}
-        defaultValue={100}
+        defaultValue={64}
       />
     </HandlerBase>
   );
@@ -85,7 +85,7 @@ const ColourHandler: React.FC = (): React.JSX.Element => {
 
 const StyleAdjuster: React.FC = (): React.JSX.Element => {
   return (
-    <div className="flex flex-row gap-x-16 gap-y-6 pb-4 px-6 mb-6 border-b border-b-white/10">
+    <div className="sticky top-0 bg-black-900 flex flex-row gap-x-16 gap-y-6 pb-4 px-6 mb-6 border-b border-b-white/10 pt-6">
       <FontHandler />
       <ColourHandler />
     </div>
