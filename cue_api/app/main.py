@@ -85,7 +85,10 @@ def submit_text(question_message: QuestionMessage):
             
             This is an example cue card:
             
-            **Paint Colours**: Lucious red, stealth black, sea green
+            **Feature**: 
+            - Style A
+            - Style B
+            - Style C
             
             The cue cards must be very short, avoid all unnecessary words.
             """,
