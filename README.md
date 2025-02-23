@@ -1,3 +1,7 @@
+# Cue Up
+Elevating all of your sales team to top-performer status.
+
+
 ## Inspiration
 
 Being part of an inbound sales driven business, we as the tech team, are always looking for ways to innovate, automate and improve both their processes and our conversions. We noticed a considerable disparity between the top and bottom sales performers, inspiring us to think how we can use AI to guide the lowest performing sales members into top performers, with real time cues on video calls.
