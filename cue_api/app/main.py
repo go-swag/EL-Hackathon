@@ -62,6 +62,7 @@ def submit_text(question_message: QuestionMessage):
 
     chat_response = client.chat.complete(
         model=model,
+        max_tokens=60,
         messages=[
             {
                 "role": "system",
@@ -76,6 +77,15 @@ def submit_text(question_message: QuestionMessage):
             **Hybrid Powertrain**  215 kW combined with 420 Nm torque
             **Fuel Efficiency** Just 2.2L/100km,  50 g/km CO₂ emissions
             **Performance** 0-100 km/h in 5.9
+            
+            This is an example cue card:
+            
+            **Euro NCAP**: 5 stars overall
+            **IIHS**: Top Safety Pick award
+            
+            This is an example cue card:
+            
+            **Paint Colours**: Lucious red, stealth black, sea green
             
             The cue cards must be very short, avoid all unnecessary words.
             """,
