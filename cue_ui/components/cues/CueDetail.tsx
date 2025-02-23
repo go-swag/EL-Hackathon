@@ -22,7 +22,7 @@ const CueBreakdown: React.FC<CueMessage> = ({
 }): React.JSX.Element => {
   const { styling } = useCues();
   return (
-    <div className="p-6 overflow-y-auto">
+    <div className="p-6">
       <h2 className="text-white text-3xl font-medium pb-4 mb-6">{question}</h2>
       <div className="mt-6 text-white">
         <div
@@ -44,16 +44,14 @@ const CueDetail: React.FC = (): React.JSX.Element => {
   const { selectedCue } = useCues();
 
   return (
-    <div className="flex flex-col h-full">
-      {!selectedCue ? (
-        <NoCueSelected />
-      ) : (
-        <div>
-          <StyleAdjuster />
-          <CueBreakdown {...selectedCue} />
+    <div className="flex flex-col h-screen overflow-y-auto">
+      {selectedCue && <StyleAdjuster />}
+      <div className="max-h-screen flex flex-col h-full">
+        <div className="flex flex-col h-full">
+          {!selectedCue ? <NoCueSelected /> : <CueBreakdown {...selectedCue} />}
+          <CueMessageBox />
         </div>
-      )}
-      <CueMessageBox />
+      </div>
     </div>
   );
 };
