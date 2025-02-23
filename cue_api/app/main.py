@@ -12,7 +12,7 @@ load_dotenv()
 app = FastAPI()
 
 client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
-model = "ministral-3b-latest"
+model = "ministral-8b-latest"
 
 app.add_middleware(
     CORSMiddleware,
@@ -102,7 +102,6 @@ def submit_text(question_message: QuestionMessage):
 @app.get("/history")
 def get_history():
     cue_details = CueDetails(cue_histories=cue_histories)
-
     return cue_details
 
 
